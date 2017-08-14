@@ -1,0 +1,5 @@
+HTTP/1.1 500 Server Error
+Content-Type: text/plain; charset=ISO-8859-1
+Transfer-Encoding: chunked
+Server: Jetty(9.2.19.v20160908)
+
