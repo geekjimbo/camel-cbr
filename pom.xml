@@ -73,9 +73,14 @@
       <artifactId>camel-jsonpath</artifactId>
       <version>${camel.version}</version>
     </dependency>
-    <dependency>                                                                                                                                    
+    <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-jetty</artifactId>
+      <version>${camel.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-http</artifactId>
       <version>${camel.version}</version>
     </dependency>
   </dependencies>
@@ -139,12 +144,6 @@
         <artifactId>maven-bundle-plugin</artifactId>
         <version>${version.maven-bundle-plugin}</version>
         <extensions>true</extensions>
-        <configuration>
-          <instructions>
-            <Bundle-SymbolicName>test-camel-cbr</Bundle-SymbolicName>
-            <Bundle-Name>Camel Content-Based Router Example [test-camel-cbr]</Bundle-Name>
-          </instructions>
-        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>

@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="              http://www.osgi.org/xmlns/blueprint/v1.0.0 https://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd              http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
-    <camelContext id="cbr-example-context" xmlns="http://camel.apache.org/schema/blueprint">
-        <restConfiguration bindingMode="json">
-          <dataFormatProperty key="prettyPrint" value="true"/>
-        </restConfiguration>
+    <camelContext id="cbr-jimmy-test" xmlns="http://camel.apache.org/schema/blueprint">
+      <!-- <restConfiguration bindingMode="json">
+          <dataFormatProperty key="prettyPrint" value="true"/> 
+        </restConfiguration> -->
+        <!--<endpoint id="entity" uri="http://localhost:3000/entity.json"> </endpoint>
+        <endpoint id="workflow" uri="http://localhost:4000/data_workflow.json"> </endpoint> -->
         <route id="cbr-route">
-            <from id="_from1" uri="jetty:http://0.0.0.0:8383/test?"/>
+            <from id="_from1" uri="jetty:http://localhost:8383/test?"/>
             <log id="_log1" message="Receiving order ..."/>
             <choice id="_choice1">
                 <when id="_when1">
@@ -15,7 +17,7 @@
                     <setHeader headerName="CamelHttpMethod">
                       <constant>GET</constant>
                     </setHeader>
-                    <to id="_to1" uri="jetty:http://localhost:4000/data_workflow.json"/>
+                    <to id="_to1" uri="http://localhost:4000?bridgeEndpoint=true"/>
                     <log id="_log11" message="Data Workflow WS called "/>
                 </when>
                 <when id="_when2">
@@ -24,7 +26,7 @@
                     <setHeader headerName="CamelHttpMethod">
                       <constant>GET</constant>
                     </setHeader>
-                    <to id="_to2" uri="jetty:http://localhost:3000/entity.json"/>
+                    <to id="_to2" uri="http://localhost:3000?bridgeEndpoint=true"/>
                     <log id="_log10" message="Entity WS called "/>
                 </when>
                 <otherwise id="_otherwise1">
