@@ -15,10 +15,10 @@ To build this project use
 
 To run the NodeJS endpoints 1 and 2 run the following commands in separate unix terminal tabs:
 
-   cd <root-endpoint1>
+   cd root_endpoint1
    node app.js
 
-   cd <root-endpoint2>
+   cd root_endpoint2
    node app.js
 
 
