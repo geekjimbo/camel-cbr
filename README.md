@@ -71,3 +71,12 @@ Use the bundle
 
 6. Client should have received a different JSON message back
 
+Next Steps
+----------
+
+To complete the use case required, the following features will need to be added in future versions:
+
+* ActiveMQ
+* MQ persistence to a DB (ie. MySQL)
+* Pass inbound JSON messages
+* Move variables to .cfg file (ie. endpoints URLs)
