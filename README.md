@@ -36,7 +36,8 @@ Before building and running this quick start you need:
 Build and Deploy the Sample
 ---------------------------
 
-1. Change your working directory to `camel-blueprint-cbr` directory.
+1. Copy the contents of <root>/config/serviceProperties.cf to ${karaf.home}/etc
+2. Change your working directory to `camel-blueprint-cbr` directory.
 * Start JBoss Fuse 
 * In the JBoss Fuse console, enter the following command:
 
@@ -79,4 +80,3 @@ To complete the use case required, the following features will need to be added 
 * ActiveMQ
 * MQ persistence to a DB (ie. MySQL)
 * Pass inbound JSON messages
-* Move variables to .cfg file (ie. endpoints URLs)

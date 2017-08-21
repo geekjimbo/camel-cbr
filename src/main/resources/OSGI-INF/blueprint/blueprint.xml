@@ -10,7 +10,7 @@
         <endpoint id="workflow" uri="http://localhost:4000/data_workflow.json"> </endpoint> -->
         <route id="cbr-route">
           <!--<from id="_from1" uri="jetty:http://localhost:8383/test?"/> -->
-          <from id="_from1" uri="jetty:restlet{{inboundEndpoint}}/test?"/>
+          <from id="_from1" uri="jetty:{{inboundEndpoint}}/test?"/>
             <log id="_log1" message="Receiving order ..."/>
             <choice id="_choice1">
                 <when id="_when1">
@@ -20,7 +20,7 @@
                       <constant>GET</constant>
                     </setHeader>
                     <!--<to id="_to1" uri="jetty:http://localhost:4000?bridgeEndpoint=true"/> -->
-                    <to id="_to1" uri="jetty:restlet{{outboundEndpoint.port4000}}?bridgeEndpoint=true"/>
+                    <to id="_to1" uri="jetty:{{outboundEndpoint.port4000}}?bridgeEndpoint=true"/>
                     <log id="_log12" message="Data Workflow WS responded: ${body}"/>
                 </when>
                 <when id="_when2">
@@ -30,7 +30,7 @@
                       <constant>GET</constant>
                     </setHeader>
                     <!--<to id="_to2" uri="jetty:http://localhost:3000?bridgeEndpoint=true"/> -->
-                    <to id="_to2" uri="jetty:restlet{{outboundEndpoint.port3000}}?bridgeEndpoint=true"/>
+                    <to id="_to2" uri="jetty:{{outboundEndpoint.port3000}}?bridgeEndpoint=true"/>
                     <log id="_log13" message="Entity WS responded: ${body}"/>
                 </when>
                 <otherwise id="_otherwise1">
