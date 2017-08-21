@@ -31,7 +31,7 @@ Before building and running this quick start you need:
 * JDK 1.7 or 1.8
 * JBoss Fuse 7
 * NodeJS
-* feature:install camel-http
+* Check pom.xml for JBoss Fuse dependencies needed to intall (ie. feature:install camel-http)
 
 Build and Deploy the Sample
 ---------------------------
