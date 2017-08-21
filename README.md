@@ -40,7 +40,7 @@ Build and Deploy the Sample
 * Start JBoss Fuse 
 * In the JBoss Fuse console, enter the following command:
 
-        osgi:install -s mvn:com.mycompany/camel-test-blueprint/1.0.0-SNAPSHOT
+        osgi:install -s mvn:com.mycompany/camel-blueprint-cbr/1.0.0-SNAPSHOT
 
 * Fuse should give you an id when the bundle is deployed
 
