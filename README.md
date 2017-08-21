@@ -15,11 +15,11 @@ To build this project use
 
 To run the NodeJS endpoints 1 and 2 run the following commands in separate unix terminal tabs:
 
-   cd root_endpoint1
-   node app.js
+    cd <root_endpoint1>
+    node app.js # runs in port 3000
 
-   cd root_endpoint2
-   node app.js
+    cd <root_ednpoint2>
+    node app.js # runs in port 4000
 
 
 System requirements
