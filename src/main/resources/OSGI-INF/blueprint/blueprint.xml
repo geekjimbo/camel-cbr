@@ -9,7 +9,12 @@
         <route id="cbr-route">
           <!--<from id="_from1" uri="jetty:http://localhost:8383/test?"/> -->
           <from id="_from1" uri="jetty:{{inboundEndpoint}}/test?"/>
-            <log id="_log1" message="Receiving order ..."/>
+          <log id="_log1" message="Receiving order with body= ${body}"/>
+
+           <filter>
+               <simple>${in.body.message.topic} == 'entity'</simple>
+               <log id="_log0" message="entity is OK" />
+           </filter>
             <choice id="_choice1">
                 <when id="_when1">
                     <!-- <xpath id="_xpath1">/message/topic = 'workflow'</xpath> -->
