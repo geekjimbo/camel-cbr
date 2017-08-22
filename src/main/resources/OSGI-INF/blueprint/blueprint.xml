@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="              http://www.osgi.org/xmlns/blueprint/v1.0.0 https://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd              http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
-    <camelContext id="cbr-jimmy-test" xmlns="http://camel.apache.org/schema/blueprint">
-      <propertyPlaceholder id="propertiesProyecto" location="file:${karaf.home}/etc/serviceProperties.cfg"/>
+
+    <camelContext id="cbr-jimmy-test" xmlns="http://camel.apache.org/schema/blueprint" trace="true" streamCache="true">
+        <propertyPlaceholder id="propertiesProyecto" location="file:${karaf.home}/etc/serviceProperties.cfg"/>
         <restConfiguration bindingMode="json">
           <dataFormatProperty key="prettyPrint" value="true"/> 
+          <dataFormatProperty key="id" value="jackson"/> 
+          <dataFormatProperty key="library" value="Jackson"/> 
         </restConfiguration>
+
         <route id="cbr-route">
-          <!--<from id="_from1" uri="jetty:http://localhost:8383/test?"/> -->
-          <from id="_from1" uri="jetty:{{inboundEndpoint}}/test?"/>
-          <log id="_log1" message="Receiving order with body= ${body}"/>
+            <!--<from id="_from1" uri="jetty:http://localhost:8383/test?"/> -->
+            <from id="_from1" uri="jetty:{{inboundEndpoint}}/test?"/>
+            <log id="_log1" message="Receiving order with body= ${body}"/>
             <choice id="_choice1">
                 <when id="_when1">
                     <!-- <xpath id="_xpath1">/message/topic = 'workflow'</xpath> -->
                     <!--<jsonpath id="_xpath2">$..[?(@.topic == 'workflow')]</jsonpath> -->
-                    <jsonpath id="_xpath2">$.[?(@.topic == 'workflow')]</jsonpath>
+                    <jsonpath id="_xpath2" suppressExceptions="true" >$.[?(@.topic == 'workflow')]</jsonpath>
                     <log id="_log3" message="Evaluating for topic==workflow"/>
                     <setHeader headerName="CamelHttpMethod">
                       <constant>GET</constant>
@@ -26,7 +30,7 @@
                 <when id="_when2">
                     <!--<xpath id="_xpath2">/message/topic = 'entity'</xpath> -->
                     <!--<jsonpath id="_xpath1">$..[?(@.topic == 'entity')]</jsonpath> -->
-                    <jsonpath id="_xpath1">$.[?(@.topic == 'entity')]</jsonpath>
+                    <jsonpath id="_xpath1" suppressExceptions="true">$.[?(@.topic == 'entity')]</jsonpath>
                     <log id="_log2" message="Evaluating for topic==entity "/>
                     <setHeader headerName="CamelHttpMethod">
                       <constant>GET</constant>
