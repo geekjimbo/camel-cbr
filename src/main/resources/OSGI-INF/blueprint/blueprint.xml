@@ -10,15 +10,11 @@
           <!--<from id="_from1" uri="jetty:http://localhost:8383/test?"/> -->
           <from id="_from1" uri="jetty:{{inboundEndpoint}}/test?"/>
           <log id="_log1" message="Receiving order with body= ${body}"/>
-
-           <filter>
-               <simple>${in.body.message.topic} == 'entity'</simple>
-               <log id="_log0" message="entity is OK" />
-           </filter>
             <choice id="_choice1">
                 <when id="_when1">
                     <!-- <xpath id="_xpath1">/message/topic = 'workflow'</xpath> -->
-                    <jsonpath id="_xpath2">$..[?(@.topic == 'workflow')]</jsonpath>
+                    <!--<jsonpath id="_xpath2">$..[?(@.topic == 'workflow')]</jsonpath> -->
+                    <jsonpath id="_xpath2">$.[?(@.topic == 'workflow')]</jsonpath>
                     <log id="_log3" message="Evaluating for topic==workflow"/>
                     <setHeader headerName="CamelHttpMethod">
                       <constant>GET</constant>
@@ -29,7 +25,8 @@
                 </when>
                 <when id="_when2">
                     <!--<xpath id="_xpath2">/message/topic = 'entity'</xpath> -->
-                    <jsonpath id="_xpath1">$..[?(@.topic == 'entity')]</jsonpath>
+                    <!--<jsonpath id="_xpath1">$..[?(@.topic == 'entity')]</jsonpath> -->
+                    <jsonpath id="_xpath1">$.[?(@.topic == 'entity')]</jsonpath>
                     <log id="_log2" message="Evaluating for topic==entity "/>
                     <setHeader headerName="CamelHttpMethod">
                       <constant>GET</constant>
