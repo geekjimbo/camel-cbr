@@ -38,19 +38,32 @@ Build and Deploy the Sample
 
 1. Copy the contents of <root>/config/serviceProperties.cf to ${karaf.home}/etc
 2. Change your working directory to `camel-blueprint-cbr` directory.
-* Start JBoss Fuse 
-* In the JBoss Fuse console, enter the following command:
+3. Start JBoss Fuse 
+4. In the JBoss Fuse console, enter the following command:
 
         osgi:install -s mvn:com.mycompany/camel-blueprint-cbr/1.0.0-SNAPSHOT
+        osgi:list | grep json 
 
-* Fuse should give you an id when the bundle is deployed
+    Should yield: json-path, json-smart, camel-jsonpath 
 
-* You can check that everything is ok by issuing  the command:
+        osgi:list | grep jackson
+
+    Should yield: camel-jackson, jackson-databind
+
+        osgi:list | grep jetty
+
+    Should yield: camel-jetty
+
+    NOTE: if some of the bundles aren't active after install, stop/start Fuse
+
+5. Fuse should give you an id when the bundle is deployed
+
+6. You can check that everything is ok by issuing  the command:
 
         osgi:list
    your bundle should be present at the end of the list
 
-* Check log for no errors:
+7. Check log for no errors:
         log:tail
 
 Use the bundle
