@@ -93,3 +93,10 @@ To complete the use case required, the following features will need to be added 
 * ActiveMQ
 * MQ persistence to a DB (ie. MySQL)
 * Pass inbound JSON messages
+
+Git tips
+--------
+To Reset Git local repo:
+          git reset
+          git checkout .
+          git clean -fdx
