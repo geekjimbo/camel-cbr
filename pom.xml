@@ -6,8 +6,8 @@
   <artifactId>rii-prototype</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>bundle</packaging>
-  <name>Fuse CBR Quickstart</name>
-  <description>Camel Content-Based Router Example</description>
+  <name>RII Prototype</name>
+  <description>RII Prototype App</description>
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>

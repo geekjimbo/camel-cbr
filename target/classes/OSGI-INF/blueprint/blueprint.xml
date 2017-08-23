@@ -2,6 +2,13 @@
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="              http://www.osgi.org/xmlns/blueprint/v1.0.0 https://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd              http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
 
+    <!-- connect to the local ActiveMQ broker -->
+    <bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+        <property name="brokerURL" value="tcp://localhost:61616" />
+        <property name="userName" value="admin" />
+        <property name="password" value="admin" />
+    </bean>
+
     <camelContext id="cbr-rii-prototype" xmlns="http://camel.apache.org/schema/blueprint" trace="true" streamCache="true">
         <propertyPlaceholder id="propertiesProyecto" location="file:${karaf.home}/etc/serviceProperties.cfg"/>
         <restConfiguration bindingMode="json">
@@ -34,6 +41,7 @@
                     <log id="_log13" message="Entity WS responded: ${body}"/>
                 </when>
                 <otherwise id="_otherwise1">
+                    <to uri="activemq:source-queue" pattern="InOnly"></to>
                     <log id="_log4" message="Order Can't be processed .. belongs to Others"/>
                 </otherwise>
             </choice>
