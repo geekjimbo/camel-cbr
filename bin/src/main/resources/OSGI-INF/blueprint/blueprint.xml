@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="              http://www.osgi.org/xmlns/blueprint/v1.0.0 https://www.osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd              http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/blueprint/camel-blueprint.xsd">
+    <camelContext id="cbr-rii-prototype" xmlns="http://camel.apache.org/schema/blueprint">
+      <propertyPlaceholder id="propertiesProyecto" location="file:${karaf.home}/etc/serviceProperties.cfg"/>
+        <route id="cbr-route">
+          <from id="_from1" uri="jetty:{{inboundEndpoint}}/test?"/>
+            <log id="_log1" message="Receiving order ..."/>
+            <choice id="_choice1">
+                <when id="_when1">
+                    <xpath id="_xpath1">/message/topic = 'workflow'</xpath>
+                    <log id="_log3" message="Evaluating for topic==workflow"/>
+                    <setHeader headerName="CamelHttpMethod">
+                      <constant>GET</constant>
+                    </setHeader>
+                    <to id="_to1" uri="jetty:{{outboundEndpoint.port4000}}?bridgeEndpoint=true"/>
+                    <log id="_log12" message="Data Workflow WS responded: ${body}"/>
+                </when>
+                <when id="_when2">
+                    <xpath id="_xpath2">/message/topic = 'entity'</xpath>
+                    <log id="_log2" message="Evaluating for topic==entity "/>
+                    <setHeader headerName="CamelHttpMethod">
+                      <constant>GET</constant>
+                    </setHeader>
+                    <to id="_to2" uri="jetty:{{outboundEndpoint.port3000}}?bridgeEndpoint=true"/>
+                    <log id="_log13" message="Entity WS responded: ${body}"/>
+                </when>
+                <otherwise id="_otherwise1">
+                    <log id="_log4" message="Order Can't be processed .. belongs to Others"/>
+                </otherwise>
+            </choice>
+            <log id="_log5" message="Done processing ${body}"/>
+        </route>
+    </camelContext>
+</blueprint>
